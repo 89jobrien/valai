@@ -1,0 +1,20 @@
+# General Information
+user_name: "Alex"
+location: "San Francisco, CA"
+
+# Agent Preferences
+preferences:
+  # The user's preferred search engine. The agent will use this if available.
+  default_search_provider: "tavily"
+  
+  # A list of favorite stock tickers for quick access.
+  favorite_stocks:
+    - "AAPL"
+    - "TSLA"
+    - "NVDA"
+
+# Notes or reminders stored by the user.
+notes:
+  - "Remember to book a flight to Seattle for next month's conference."
+  - "My sister's birthday is on August 15th."
+

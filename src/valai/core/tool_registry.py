@@ -1,0 +1,33 @@
+from valai.tools import (
+    calendar_tools,
+    code_tools,
+    email_tools,
+    file_tools,
+    knowledge_tools,
+    note_tools,
+    search_tools,
+    system_tools,
+    todo_tools,
+    webscraping_tools,
+)
+
+TOOL_REGISTRY = {
+    "web_search": search_tools.web_search,
+    "save_note": note_tools.save_note,
+    "retrieve_notes": note_tools.retrieve_notes,
+    "add_document_to_knowledge_base": knowledge_tools.add_document_to_knowledge_base,
+    "search_knowledge_base": knowledge_tools.search_knowledge_base,
+    "run_python_code": code_tools.run_python_code,
+    "write_file": file_tools.write_file,
+    "read_file": file_tools.read_file,
+    "list_upcoming_events": calendar_tools.list_upcoming_events,
+    "scrape_url": webscraping_tools.scrape_url,
+    "send_email": email_tools.send_email,
+    "get_system_metrics": system_tools.get_system_metrics,
+    "get_current_time": system_tools.get_current_time,
+    "get_knowledge_base_stats": knowledge_tools.get_knowledge_base_stats,
+    "create_calendar_event": calendar_tools.create_calendar_event,
+    "add_todo": todo_tools.add_todo,
+    "view_todos": todo_tools.view_todos,
+    "complete_todo": todo_tools.complete_todo,
+}

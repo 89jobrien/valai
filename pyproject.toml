@@ -1,0 +1,98 @@
+[project]
+name = "valai"
+version = "0.1.0"
+description = "Valai: A multi-agent system built for productivity."
+readme = "README.md"
+authors = [
+    { name = "jprobrien", email = "98370624+89jobrien@users.noreply.github.com" },
+]
+requires-python = ">=3.12"
+dependencies = [
+    "beautifulsoup4>=4.13.4",
+    "chromadb>=1.0.15",
+    "duckduckgo-search>=8.1.0",
+    "fastapi>=0.115.14",
+    "langchain-text-splitters>=0.3.8",
+    "ollama>=0.5.1",
+    "openai>=1.93.0",
+    "psutil>=7.0.0",
+    "psycopg2-binary>=2.9.10",
+    "pydantic[email]>=2.11.7",
+    "pydantic-ai>=0.3.6",
+    "pydantic-settings>=2.10.1",
+    "pypdf>=5.7.0",
+    "python-dotenv>=1.1.1",
+    "pyyaml>=6.0.2",
+    "requests>=2.32.4",
+    "ruff>=0.12.2",
+    "tavily-python>=0.7.9",
+    "yfinance>=0.2.64",
+    "rich>=14.0.0",
+]
+license = { text = "MIT" }
+
+[project.scripts]
+valai = "valai:main"
+start-assistant = "valai.main:start_assistant"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = [
+    "loguru>=0.7.3",
+    "pytest>=8.4.1",
+    "pytest-asyncio>=1.0.0",
+    "pytest-cov>=6.2.1",
+    "pytest-mock>=3.14.1",
+]
+google = [
+    "google-api-python-client>=2.175.0",
+    "google-auth-httplib2>=0.2.0",
+    "google-auth-oauthlib>=1.2.2",
+]
+
+[tool.ruff]
+line-length = 88
+target-version = "py312"
+ignore = [
+    "D100",
+    "D101",
+    "D102",
+    "D103",
+    "D104",
+    "D105",
+    "D106",
+    "D107",
+    "D205",
+    "D401",
+    "E501",
+]
+[tool.ruff.format]
+quote-style = "double"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W", "C90", "N", "D"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v"
+minversion = "6.0"
+log_level = "INFO"
+norecursedirs = [".git", ".venv"]
+cache_dir = ".pytest_cache"
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks tests as integration tests",
+    "unit: marks tests as unit tests",
+]
+
+[tool.coverage.run]
+branch = true
+source = [
+    "valai",
+]
+
+[tool.coverage.report]
+show_missing = true
