@@ -178,7 +178,7 @@ uv run start-app --ui cli
 
 The application operates on a simple but powerful loop:
 
-1. **Input:** User enters a query in the CLI (`main.py`).
+1. **Input:** User enters a query.
 2. **Routing:** The Router Agent analyzes the query and selects the most appropriate specialist from the enabled agents.
 3. **Execution:** The Assistant class receives the route and dispatches the query to the chosen agent.
 4. **Tool Use:** The specialist agent uses its dedicated tools to fulfill the request.
