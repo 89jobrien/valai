@@ -28,6 +28,7 @@ class AgentToggler(BaseSettings):
     use_system_agent: bool = True
     use_webscraping_agent: bool = True
     use_todo_agent: bool = True
+    use_writing_agent: bool = True
 
 
 class Settings(BaseSettings):

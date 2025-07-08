@@ -9,6 +9,7 @@ from valai.tools import (
     system_tools,
     todo_tools,
     webscraping_tools,
+    writing_tools,
 )
 
 TOOL_REGISTRY = {
@@ -30,4 +31,9 @@ TOOL_REGISTRY = {
     "add_todo": todo_tools.add_todo,
     "view_todos": todo_tools.view_todos,
     "complete_todo": todo_tools.complete_todo,
+    "improve_writing": writing_tools.improve_writing,
+    "fix_spelling_grammar": writing_tools.fix_spelling_grammar,
+    "make_shorter": writing_tools.make_shorter,
+    "make_longer": writing_tools.make_longer,
+    "change_tone": writing_tools.change_tone,
 }

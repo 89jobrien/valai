@@ -7,6 +7,8 @@ notes.*
 db/
 .DS_Store
 tests/
+public/
+.vscode
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

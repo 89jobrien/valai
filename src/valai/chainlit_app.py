@@ -1,8 +1,12 @@
 import chainlit as cl
 
+from valai.agents.base import get_enabled_agents
+
 # from mcp import ClientSession
 from valai.core.assistant import Assistant
+from valai.core.tool_registry import TOOL_REGISTRY
 
+# TODO: To get a sidebar with chat history, auth and a database need to be implemented
 # @cl.password_auth_callback
 # async def auth_callback(username: str, password: str):
 #     # Fetch the user matching username from your database
@@ -14,6 +18,9 @@ from valai.core.assistant import Assistant
 #     else:
 #         return None
 
+enabled_agents = get_enabled_agents()
+available_tools = [tool for tool in TOOL_REGISTRY.values() if tool in enabled_agents]
+
 
 @cl.on_chat_start
 async def start_chat():
@@ -21,7 +28,10 @@ async def start_chat():
     await cl.Message(
         content="""Hello! I am ValAI, your AI assistant.
 
-I can help with a variety of tasks by routing your requests to specialized agents. How can I assist you today?""",
+I can help with a variety of tasks by routing your requests to specialized agents. How can I assist you today?
+
+Available agents: """
+        + ", ".join(enabled_agents),
         author="ValAI",
     ).send()
 

@@ -63,7 +63,7 @@ def load_agents() -> Dict[str, Agent]:
             )
             continue
 
-        logger.debug(f"Loading enabled agent: {agent_name} from {config_path}")
+        # logger.debug(f"Loading enabled agent: {agent_name} from {config_path}")
         with open(config_path, "r") as f:
             config = yaml.safe_load(f)
 
@@ -80,8 +80,8 @@ def load_agents() -> Dict[str, Agent]:
                 f"The current date and time is: {timestamp}. Use this information to "
                 f"better understand user queries about recent events. {config['system_prompt']}"
             )
-            logger.info(f"Prompt: {prompt}")
-            logger.info(f"Injecting timestamp into '{agent_name}' prompt.")
+            # logger.info(f"Prompt: {prompt}")
+            # logger.info(f"Injecting timestamp into '{agent_name}' prompt.")
 
         agents[agent_name] = Agent(
             model=get_llm_client(),
