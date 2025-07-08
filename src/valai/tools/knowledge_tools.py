@@ -10,7 +10,7 @@ from loguru import logger
 from pydantic import BaseModel, Field
 
 from valai.config import get_settings
-from valai.core.console import console  # Use the shared console for startup messages
+from valai.core.console import console
 
 
 class AddDocumentArgs(BaseModel):

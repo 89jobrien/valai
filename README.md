@@ -18,7 +18,7 @@ ValAI is a sophisticated, command-line-based **AI assistant** built on a powerfu
   - Note-Taking & To-Do Lists
   - Long-Term Knowledge Base (RAG)
   - System Monitoring
-- **Configurable LLM Backends:** Seamlessly switch between local inference with Ollama and powerful cloud models via Azure OpenAI.
+- **Configurable LLM Backends:** Seamlessly switch between local inference with Ollama and powerful cloud models via OpenAI and Azure.
 - **Interactive CLI:** A user-friendly command-line interface powered by `rich` for a clean and colorful user experience.
 
 ---
@@ -38,22 +38,22 @@ ValAI is a sophisticated, command-line-based **AI assistant** built on a powerfu
 ├── src/
 │   └── valai/
 │       ├── agents/
-│       │   └── base.py          # Core agent loading and routing logic
+│       │   └── base.py         # Core agent loading and routing logic
 │       ├── core/
-│       │   ├── config.py        # Pydantic settings management
-│       │   ├── console.py       # Shared Rich console instance
-│       │   ├── history.py       # Conversation history management
-│       │   ├── llm_factory.py   # Creates LLM clients (Ollama/Azure)
-│       │   ├── route.py         # Dynamic Pydantic model for routing
+│       │   ├── assistant.py    # Core asynchronous Assistant class
+│       │   ├── config.py       # Pydantic settings management
+│       │   ├── console.py      # Shared Rich console instance
+│       │   ├── history.py      # Conversation history management
+│       │   ├── llm_factory.py  # Creates LLM clients (Ollama/Azure/OpenAI)
+│       │   ├── rag_pipeline.py # Background RAG processing
+│       │   ├── route.py        # Dynamic Pydantic model for routing
 │       │   └── tool_registry.py # Central registry for all tools
 │       ├── tools/
-│       │   ├── calendar_tools.py
-│       │   ├── code_tools.py
-│       │   └── ... (other tool modules)
-│       └── main.py             # Main application entry point
+│       │   └── ... (all tool modules)
+│       ├── app.py              # Main Typer CLI entry point (chooses UI)
+│       ├── chainlit_app.py     # Chainlit UI logic
+│       └── cli.py              # Command-line interface logic
 ├── .env.example                # Example environment file
-├── notes.json                  # Data file for NoteAgent
-├── todo_list.json              # Data file for TodoAgent
 └── README.md
 ```
 
@@ -156,11 +156,20 @@ To use the Calendar Agent, enable the Google Calendar API and download your `cre
 
 ### 4. Running the Assistant
 
-Start the interactive CLI:
+Use the main application entry point to launch your desired interface.
+
+- **To run the Chainlit UI (default):**
 
 ```bash
-uv run start-assistant
+uv run start-app
+# OR explicitly
+uv run start-app --ui chainlit
+```
 
+- **To run the classic Command-Line Interface:**
+
+```bash
+uv run start-app --ui cli
 ```
 
 ---

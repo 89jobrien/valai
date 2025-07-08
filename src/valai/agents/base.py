@@ -25,13 +25,9 @@ def get_enabled_agents() -> List[str]:
     enabled_agents = []
     for toggle_name, is_enabled in toggler.items():
         if is_enabled:
-            # 'use_code_agent' -> 'code_agent'
             processed_name = toggle_name.replace("use_", "")
-            # 'code_agent' -> ['code', 'agent']
             parts = processed_name.split("_")
-            # ['Code', 'Agent']
             capitalized_parts = [part.capitalize() for part in parts]
-            # 'Code Agent'
             final_name = " ".join(capitalized_parts)
             enabled_agents.append(final_name)
 
@@ -40,28 +36,22 @@ def get_enabled_agents() -> List[str]:
 
 
 # Dynamically create the Route class based on enabled agents.
-# This is the single source of truth for the Route model.
 Route: BaseModel = create_dynamic_route_model(get_enabled_agents())  # type: ignore
 
 
 @lru_cache
 def load_agents() -> Dict[str, Agent]:
-    """Discovers and loads configurations ONLY for agents that are enabled,
-    matching the properly formatted agent names.
+    """Discovers and loads configurations for all enabled agents. It selectively
+    injects a timestamp into the Search Agent's prompt for better context.
     """
     agents = {}
     enabled_agent_names = get_enabled_agents()
 
-    # Create a mapping from formatted agent name (e.g., "Code Agent") to its config file path.
     agent_configs = {}
     for config_path in glob.glob("config/agents/*.yaml"):
-        # 'code_agent.yaml' -> 'code_agent'
         stem = Path(config_path).stem
-        # 'code_agent' -> ['code', 'agent']
         parts = stem.split("_")
-        # ['Code', 'Agent']
         capitalized_parts = [part.capitalize() for part in parts]
-        # 'Code Agent'
         formatted_name = " ".join(capitalized_parts)
         agent_configs[formatted_name] = config_path
 
@@ -84,6 +74,14 @@ def load_agents() -> Dict[str, Agent]:
         ]
 
         prompt = config["system_prompt"]
+        if agent_name == "Search Agent":
+            timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            prompt = (
+                f"The current date and time is: {timestamp}. Use this information to "
+                f"better understand user queries about recent events. {config['system_prompt']}"
+            )
+            logger.info(f"Prompt: {prompt}")
+            logger.info(f"Injecting timestamp into '{agent_name}' prompt.")
 
         agents[agent_name] = Agent(
             model=get_llm_client(),
