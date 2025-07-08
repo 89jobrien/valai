@@ -1,5 +1,3 @@
-# valai/core/history.py
-
 from pydantic_ai import RunContext
 from pydantic_ai.messages import (
     ModelMessage,
