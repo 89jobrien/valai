@@ -71,7 +71,7 @@ ValAI is a sophisticated, command-line-based **AI assistant** built on a powerfu
 Clone the repository:
 
 ```bash
-git clone
+git clone https://github.com/89jobrien/valai.git
 cd
 
 ```
