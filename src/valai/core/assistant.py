@@ -82,14 +82,12 @@ class Assistant:
             route = await self._get_routing_decision(query)
 
             if route.specialist_name == "Search Agent":
-                # Check if the user's query already contains a 4-digit year.
+                # check if query already contains a 4 digit year
                 user_query_has_year = re.search(r"\b(19|20)\d{2}\b", query)
 
-                # Only modify the query if the user did NOT specify a year.
+                # only modify query if they did NOT specify a year
                 if not user_query_has_year:
                     current_year_str = str(datetime.now().year)
-                    # To be safe, we remove any incorrect year the router might have added
-                    # and append the correct current year.
                     query_for_specialist = re.sub(
                         r"\s*\b(19|20)\d{2}\b\s*", " ", route.query_for_specialist
                     ).strip()
@@ -98,7 +96,7 @@ class Assistant:
                     console.log(
                         f"[bold yellow]Query modified for Search Agent: '{route.query_for_specialist}' -> '{modified_query}'[/bold yellow]"
                     )
-                    # Update the route object before it's passed to the specialist.
+                    # update the router before passing to agent
                     route.query_for_specialist = modified_query
 
             yield {"status": f"🚦 Routing to: {route.specialist_name}"}
