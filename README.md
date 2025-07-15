@@ -166,7 +166,7 @@ uv run start-app
 uv run start-app --ui chainlit
 ```
 
-- **To run the classic Command-Line Interface:**
+- **To run the CLI:**
 
 ```bash
 uv run start-app --ui cli
