@@ -84,9 +84,15 @@ uv venv
 
 Activate the environment:
 
+- On MacOS/Linux:
+
 ```bash
 source .venv/bin/activate
+```
 
+On Windows:
+```pwsh
+.venv\Scripts\activate
 ```
 
 Install dependencies:
