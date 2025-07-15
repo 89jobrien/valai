@@ -1,6 +1,6 @@
 # Val: A Modular, Multi-Agent AI Assistant
 
-Val is a sophisticated, command-line-based **AI assistant** built on a powerful multi-agent architecture. It uses a central Router to intelligently delegate tasks to a suite of specialized agents, each equipped with unique tools for specific requests. This modular design allows for easy extension and customization, making ValAI a robust platform for building advanced AI applications.
+Val is a sophisticated, command-line-based **AI assistant** built on a powerful multi-agent architecture. It uses a central `RouterAgent` to intelligently delegate tasks to a suite of specialized agents, each equipped with unique tools for specific requests. This modular design allows for easy extension and customization, making ValAI a robust platform for building advanced AI applications.
 
 ---
 
