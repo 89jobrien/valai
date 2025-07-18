@@ -1,7 +1,7 @@
 import threading
 
 from loguru import logger
-
+from pydantic_ai.messages import TextPart, UserPromptPart
 from valai.core.history import ConversationHistory
 from valai.tools.knowledge_tools import (
     AddDocumentArgs,
@@ -41,8 +41,8 @@ class BackgroundRAG:
             if len(last_turn) < 2:
                 return  # Not a full turn, nothing to embed
 
-            user_msg = last_turn[0].parts[0].content
-            assistant_msg = last_turn[1].parts[0].content
+            user_msg = last_turn[0].parts[0].content if isinstance(last_turn[0].parts[0], UserPromptPart) else None
+            assistant_msg = last_turn[1].parts[0].content if isinstance(last_turn[1].parts[0], TextPart) else None
 
             # Format the conversation turn into a single document
             document_content = (
